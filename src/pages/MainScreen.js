@@ -1,19 +1,27 @@
 import React from 'react'
-import { Text, View, StyleSheet, Button } from 'react-native'
+import { Text, View, StyleSheet, Button, ScrollView } from 'react-native'
+
+import { Recipe } from '../components/Recipe'
 
 export const MainScreen = ({navigation}) => {
+
+    const handleOpenRecipe = () => {
+        navigation.navigate('Recipe')
+    }
+
     return(
-        <View style={styles.container} >
-            <Text>Main page</Text>
-            <Button title="Press" onPress={() => navigation.navigate('Recipe')} />
-        </View>
+        <ScrollView>
+            <Recipe onOpen={handleOpenRecipe} />
+            <Recipe />
+            <Recipe />
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
+    center:{
+        justifyContent: 'center',
         alignItems: 'center',
-        justifyContent: 'center'
+        flex: 1
     }
 })
