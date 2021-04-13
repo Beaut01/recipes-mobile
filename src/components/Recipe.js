@@ -1,17 +1,17 @@
 import React from 'react'
 import { View, TouchableNativeFeedback, ImageBackground, StyleSheet, Text } from 'react-native'
 
-export const Recipe = ({onOpen}) => {
+export const Recipe = ({onOpen, recipe}) => {
     return(
-        <TouchableNativeFeedback onPress={() => onOpen}>
+        <TouchableNativeFeedback onPress={() => onOpen(recipe)}>
             <View style={styles.recipe}>
-                <ImageBackground style={styles.image} source={{ uri: 'https://www.gastronom.ru/binfiles/images/20180216/b7343f01.jpg'}}>
+                <ImageBackground style={styles.image} source={{ uri: recipe.imageURL}}>
                     <View style={styles.textWrapp}>
-                        <Text style={styles.title}>Луковый суп</Text>
+                        <Text style={styles.title}>{recipe.name}</Text>
                     </View>
                 </ImageBackground>
                 <View style={styles.ingr} >
-                    <Text>Нужен лук и ещё лук, ну и ещё лук</Text>
+                    <Text>{recipe.ingredients}</Text>
                 </View>
             </View>
         </TouchableNativeFeedback>

@@ -1,20 +1,29 @@
 import React from 'react'
-import { Text, View, StyleSheet, Button, ScrollView } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 import { Recipe } from '../components/Recipe'
+import { loadRecipes } from '../redux/actions/recipes'
 
 export const MainScreen = ({navigation}) => {
-
-    const handleOpenRecipe = () => {
-        navigation.navigate('Recipe')
+    const dispatch = useDispatch()
+    const {recipes, loading} = useSelector(state => state.recipe)
+    
+    const handleOpenRecipe = recipe => {
+        navigation.navigate('Recipe', {recipeID: recipe.id})
     }
 
+    React.useEffect(() => {
+        dispatch(loadRecipes())
+    }, [dispatch])
+
     return(
-        <ScrollView>
-            <Recipe onOpen={handleOpenRecipe} />
-            <Recipe />
-            <Recipe />
-        </ScrollView>
+        <FlatList 
+            data={recipes}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({item}) => <Recipe recipe={item} onOpen={handleOpenRecipe} />}
+        />
     )
 }
 

@@ -1,18 +1,38 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, ScrollView, StyleSheet, View, ImageBackground } from 'react-native'
+import { useSelector } from 'react-redux'
 
-export const RecipeScreen = () => {
+export const RecipeScreen = ({route}) => {
+    const recipeID = route.params?.recipeID
+    const recipe = useSelector(({recipe}) => recipe.recipes.find(r => r.id === recipeID))
+    console.log(recipe);
     return(
-        <View style={styles.container} >
-            <Text>RecipeScreen</Text>
-        </View>
+        <ScrollView >
+            <ImageBackground style={styles.image} source={{uri: recipe.imageURL}} />
+            <Text style={styles.title}>Список ингредиентов</Text>
+            <View style={styles.body}>
+                <Text>{recipe.ingredients}</Text>
+            </View>
+            <Text style={styles.title}>Способ приготовления</Text>
+            <View style={styles.body}>
+                <Text>{recipe.description}</Text>
+            </View>
+        </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+    image:{
+        height: 250,
+        width: '100%'
+    },
+    title:{
+        fontSize: 25,
+        paddingLeft: 20,
+        paddingVertical: 10
+    },
+    body:{
+        paddingVertical: 5,
+        paddingLeft: 10
     }
 })
