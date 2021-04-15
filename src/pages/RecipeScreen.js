@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 export const RecipeScreen = ({route}) => {
     const recipeID = route.params?.recipeID
     const recipe = useSelector(({recipe}) => recipe.recipes.find(r => r.id === recipeID))
-    console.log(recipe);
+    
     return(
         <ScrollView >
             <ImageBackground style={styles.image} source={{uri: recipe.imageURL}} />

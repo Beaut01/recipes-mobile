@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, TouchableNativeFeedback, ImageBackground, StyleSheet, Text } from 'react-native'
 
-export const Recipe = ({onOpen, recipe}) => {
+export const Recipe = ({onOpen, recipe, onDelete}) => {
     return(
-        <TouchableNativeFeedback onPress={() => onOpen(recipe)}>
+        <TouchableNativeFeedback onPress={() => onOpen(recipe)} onLongPress={() => onDelete(recipe.id)}>
             <View style={styles.recipe}>
                 <ImageBackground style={styles.image} source={{ uri: recipe.imageURL}}>
                     <View style={styles.textWrapp}>

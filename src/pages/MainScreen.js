@@ -1,17 +1,40 @@
 import React from 'react'
-import { StyleSheet, FlatList } from 'react-native'
+import { StyleSheet, FlatList, Alert } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 
 import { Recipe } from '../components/Recipe'
-import { loadRecipes } from '../redux/actions/recipes'
+import { deleteRecipe, loadRecipes } from '../redux/actions/recipes'
 
 export const MainScreen = ({navigation}) => {
     const dispatch = useDispatch()
     const {recipes, loading} = useSelector(state => state.recipe)
     
     const handleOpenRecipe = recipe => {
-        navigation.navigate('Recipe', {recipeID: recipe.id})
+        navigation.navigate('Recipe', {
+            recipeID: recipe.id,
+            recipeTitle: recipe.name
+        })
+    }
+
+    const handleDeleteRecipe = id => {
+        Alert.alert(
+            "Удаление рецепта.",
+            "Точно хотите удалить этот рецепт?",
+            [
+              {
+                text: "Закрыть",
+                style: "cancel"
+              },
+              { text: "Удалить",
+                style: 'destructive', 
+                onPress() {
+                    dispatch(deleteRecipe(id))
+                }
+            }
+            ],
+            { cancelable: true }
+          )
     }
 
     React.useEffect(() => {
@@ -22,7 +45,7 @@ export const MainScreen = ({navigation}) => {
         <FlatList 
             data={recipes}
             keyExtractor={item => item.id.toString()}
-            renderItem={({item}) => <Recipe recipe={item} onOpen={handleOpenRecipe} />}
+            renderItem={({item}) => <Recipe recipe={item} onOpen={handleOpenRecipe} onDelete={handleDeleteRecipe} />}
         />
     )
 }

@@ -16,6 +16,9 @@ export const MainStack = () => {
             <mainStack.Screen 
                 name='Recipe'
                 component={RecipeScreen}
+                options={({route}) => ({
+                    title: route.params?.recipeTitle
+                })}
             /> 
         </mainStack.Navigator>
     )

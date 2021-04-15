@@ -1,4 +1,4 @@
-import {LOAD_RECIPES} from '../types'
+import {LOAD_RECIPES, ADD_RECIPE, DELETE_RECIPE} from '../types'
 
 const initialState = {
     recipes: [],
@@ -11,6 +11,16 @@ export const recipesReducer = (state = initialState, action) => {
             return{
                 recipes: action.payload,
                 loading: false
+            }
+        case ADD_RECIPE: 
+            return{
+                ...state,
+                recipes: [{...action.payload}, ...state.recipes]
+            }
+        case DELETE_RECIPE:
+            return{
+                ...state, 
+                recipes: state.recipes.filter(recipe => recipe.id !== action.payload)
             }
         default: 
             return state
