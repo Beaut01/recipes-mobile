@@ -1,10 +1,11 @@
 import React from 'react'
-import { StyleSheet, FlatList, Alert } from 'react-native'
+import { StyleSheet, FlatList, Alert, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 
 import { Recipe } from '../components/Recipe'
 import { deleteRecipe, loadRecipes } from '../redux/actions/recipes'
+import {Categories} from '../components/Categories'
 
 export const MainScreen = ({navigation}) => {
     const dispatch = useDispatch()
@@ -42,11 +43,14 @@ export const MainScreen = ({navigation}) => {
     }, [dispatch])
 
     return(
-        <FlatList 
-            data={recipes}
-            keyExtractor={item => item.id.toString()}
-            renderItem={({item}) => <Recipe recipe={item} onOpen={handleOpenRecipe} onDelete={handleDeleteRecipe} />}
-        />
+        <View>
+            <Categories />
+            <FlatList 
+                data={recipes}
+                keyExtractor={item => item.id.toString()}
+                renderItem={({item}) => <Recipe recipe={item} onOpen={handleOpenRecipe} onDelete={handleDeleteRecipe} />}
+            />
+        </View>
     )
 }
 
