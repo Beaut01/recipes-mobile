@@ -12,12 +12,19 @@ export const MainStack = () => {
             <mainStack.Screen 
                 name='Main'
                 component={MainScreen}
+                options={{
+                    title: 'Рецептник',
+                    headerTintColor: '#fff',
+                    headerStyle: {backgroundColor: '#9575cd'}
+                }}
             /> 
             <mainStack.Screen 
                 name='Recipe'
                 component={RecipeScreen}
                 options={({route}) => ({
-                    title: route.params?.recipeTitle
+                    title: route.params?.recipeTitle,
+                    headerStyle: {backgroundColor: '#9575cd'},
+                    headerTintColor: '#fff'
                 })}
             /> 
         </mainStack.Navigator>

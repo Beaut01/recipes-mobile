@@ -5,6 +5,11 @@ import { Category } from './Category'
 
 const categories = [
     {
+        id: 33,
+        name: 'Все',
+        URL: 'https://grandkulinar.ru/uploads/posts/2019-02/1550337897_vkusnye-i-krasivye-blyuda-populyarnye-v-instagram.jpg'
+    },
+    {
         id: 0,
         name: 'Мясные',
         URL: 'https://xcook.info/wp-content/cache/thumb/91/d7a8ce78018d991_750x375.jpg'
@@ -33,6 +38,11 @@ const categories = [
         id: 5,
         name: 'Выпечка',
         URL: 'https://static-sl.insales.ru/images/products/1/4339/349892851/%D0%BA%D1%80%D1%83%D0%B0%D1%81%D1%81%D0%B0%D0%BD.jpg'
+    },
+    {
+        id: 6,
+        name: 'Супы',
+        URL: 'https://2recepta.com/recept/borshh/borshh.jpg'
     }
 ]
 

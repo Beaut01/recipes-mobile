@@ -1,9 +1,17 @@
 import React from 'react'
 import { View, StyleSheet, ImageBackground, Text, TouchableOpacity} from 'react-native'
+import { useDispatch } from 'react-redux'
+import { changeCategory } from '../redux/actions/categories'
 
-export const Category = ({URL, name}) => {
+export const Category = ({URL, name, id}) => {
+    const dispatch = useDispatch()
+
+    const changeActiveCategory = id => {
+        dispatch(changeCategory(id))
+    }
+
     return(
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => changeActiveCategory(id)} >
             <View style={styles.category}>
                 <ImageBackground style={styles.image} source={{uri: URL}}>
                     <View style={styles.textWrapp}>

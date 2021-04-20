@@ -10,6 +10,7 @@ import {Categories} from '../components/Categories'
 export const MainScreen = ({navigation}) => {
     const dispatch = useDispatch()
     const {recipes, loading} = useSelector(state => state.recipe)
+    const activeCategory = useSelector(({categories}) => categories.category )
     
     const handleOpenRecipe = recipe => {
         navigation.navigate('Recipe', {
@@ -40,13 +41,23 @@ export const MainScreen = ({navigation}) => {
 
     React.useEffect(() => {
         dispatch(loadRecipes())
-    }, [dispatch])
+    }, [dispatch, activeCategory])
+
+    const filteredRecipes = recipes.filter(r => r.category === activeCategory)
+
+    let data
+
+    if (activeCategory === 33) {
+        data = recipes
+    } else {
+        data = filteredRecipes
+    }
 
     return(
         <View>
             <Categories />
             <FlatList 
-                data={recipes}
+                data={data}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({item}) => <Recipe recipe={item} onOpen={handleOpenRecipe} onDelete={handleDeleteRecipe} />}
             />

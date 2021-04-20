@@ -12,6 +12,14 @@ export const AddRecipe = ({navigation}) => {
     const [selectedValue, setSelectedValue] = React.useState('0')
     const [image, setImage] = React.useState(null)
 
+    const clearFields = () => {
+        onChangeName('')
+        onChangeDescr('')
+        onChangeIng('')
+        setSelectedValue('0')
+        setImage(null)
+    }
+
     const createRecipe = () => {
         const recipe = {
             name: name,
@@ -23,6 +31,7 @@ export const AddRecipe = ({navigation}) => {
         }
         dispatch(addRecipe(recipe))
         navigation.navigate('Main')
+        clearFields()
     }
 
     const photoGetHandler = uri => {
@@ -52,6 +61,7 @@ export const AddRecipe = ({navigation}) => {
                             <Picker.Item label='Острые' value='3' />
                             <Picker.Item label='Сладкие' value='4' />
                             <Picker.Item label='Выпечка' value='5' />
+                            <Picker.Item label='Супы' value='6' />
                         </Picker>
                     </View>
                     <TextInput 
