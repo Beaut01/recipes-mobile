@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, FlatList, Alert, View } from 'react-native'
+import { StyleSheet, FlatList, Alert, View, TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 
 import { Recipe } from '../components/Recipe'
 import { deleteRecipe, loadRecipes } from '../redux/actions/recipes'
 import {Categories} from '../components/Categories'
+import { Ionicons } from '@expo/vector-icons'
 
 export const MainScreen = ({navigation}) => {
     const dispatch = useDispatch()
@@ -43,6 +44,16 @@ export const MainScreen = ({navigation}) => {
         dispatch(loadRecipes())
     }, [dispatch, activeCategory])
 
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <TouchableOpacity onPress={() => navigation.navigate('Search', {onOpen: handleOpenRecipe, onDelete: handleDeleteRecipe})}>
+                    <Ionicons size={30} style={styles.search} name='search' />
+                </TouchableOpacity>
+            )
+        })
+    },[navigation])
+
     const filteredRecipes = recipes.filter(r => r.category === activeCategory)
 
     let data
@@ -70,5 +81,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1
+    },
+    search: {
+        paddingRight: 10,
+        color: '#fff'
     }
 })

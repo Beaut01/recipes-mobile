@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack'
 
 import { MainScreen } from '../pages/MainScreen'
 import { RecipeScreen } from '../pages/RecipeScreen'
+import { SearchScreen } from '../pages/SearchScreen'
 
 const mainStack = createStackNavigator()
 
@@ -27,6 +28,15 @@ export const MainStack = () => {
                     headerTintColor: '#fff'
                 })}
             /> 
+            <mainStack.Screen 
+                name='Search'
+                component={SearchScreen}
+                options={{
+                    title:'Поиск',
+                    headerTintColor: '#fff',
+                    headerStyle: {backgroundColor: '#9575cd'}
+                }}
+            />
         </mainStack.Navigator>
     )
 }

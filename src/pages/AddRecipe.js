@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, TouchableWithoutFeedback, ScrollView, TextInput, Button, Picker } from 'react-native'
+import { Text, View, StyleSheet, TouchableWithoutFeedback, ScrollView, TextInput, Button, Picker, Keyboard } from 'react-native'
 import { useDispatch} from 'react-redux'
 import { addRecipe } from '../redux/actions/recipes'
 import GetPhoto from '../components/ImagePicker'
@@ -40,7 +40,7 @@ export const AddRecipe = ({navigation}) => {
  
     return(
         <ScrollView>
-            <TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} >
                 <View style={styles.wrapper}>
                     <Text style={styles.title}>Напишите рецепт!</Text>
                     <TextInput 

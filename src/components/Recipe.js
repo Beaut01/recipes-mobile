@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         marginBottom: 15,
         padding: 10,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        height: 'auto'
     },
     title:{
         color: '#fff',
