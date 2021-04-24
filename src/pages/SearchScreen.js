@@ -3,11 +3,36 @@ import { View, StyleSheet, TextInput, FlatList } from 'react-native'
 import { useSelector } from 'react-redux'
 import { Recipe } from '../components/Recipe'
 
-export const SearchScreen = ({route}) => {
+export const SearchScreen = ({navigation}) => {
     const [value, onChangeValue] = React.useState('')
     const recipes = useSelector(({recipe}) => recipe.recipes)
-    const onOpen = route.params?.onOpen
-    const onDelete = route.params?.onDelete
+
+    const handleOpenRecipe = recipe => {
+        navigation.navigate('Recipe', {
+            recipeID: recipe.id,
+            recipeTitle: recipe.name
+        })
+    }
+
+    const handleDeleteRecipe = id => {
+        Alert.alert(
+            "Удаление рецепта.",
+            "Точно хотите удалить этот рецепт?",
+            [
+              {
+                text: "Закрыть",
+                style: "cancel"
+              },
+              { text: "Удалить",
+                style: 'destructive', 
+                onPress() {
+                    dispatch(deleteRecipe(id))
+                }
+            }
+            ],
+            { cancelable: true }
+          )
+    }
     
     const filteredRecipes = recipes.filter(r => r.name.toLowerCase().includes(value.toLocaleLowerCase()))
     
@@ -22,7 +47,8 @@ export const SearchScreen = ({route}) => {
             <FlatList 
                 data={filteredRecipes}
                 keyExtractor={item => item.id.toString()}
-                renderItem={({item}) => <Recipe recipe={item} onOpen={onOpen} onDelete={onDelete} />}
+                renderItem={({item}) => <Recipe recipe={item} onOpen={handleOpenRecipe} onDelete={handleDeleteRecipe} />}
+                showsVerticalScrollIndicator={false}
             />
         </View>
         

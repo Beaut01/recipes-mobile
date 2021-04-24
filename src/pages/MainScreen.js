@@ -47,7 +47,7 @@ export const MainScreen = ({navigation}) => {
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerRight: () => (
-                <TouchableOpacity onPress={() => navigation.navigate('Search', {onOpen: handleOpenRecipe, onDelete: handleDeleteRecipe})}>
+                <TouchableOpacity onPress={() => navigation.navigate('Search')}>
                     <Ionicons size={30} style={styles.search} name='search' />
                 </TouchableOpacity>
             )
@@ -64,13 +64,18 @@ export const MainScreen = ({navigation}) => {
         data = filteredRecipes
     }
 
+    const getHeader = () => {
+        return <Categories />
+    }
+
     return(
         <View>
-            <Categories />
             <FlatList 
                 data={data}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({item}) => <Recipe recipe={item} onOpen={handleOpenRecipe} onDelete={handleDeleteRecipe} />}
+                ListHeaderComponent={getHeader}
+                showsVerticalScrollIndicator={false}
             />
         </View>
     )

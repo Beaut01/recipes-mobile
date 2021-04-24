@@ -33,6 +33,11 @@ const styles = StyleSheet.create({
     },
     body:{
         paddingVertical: 5,
-        paddingLeft: 10
+        paddingLeft: 10,
+        marginHorizontal: 10,
+        backgroundColor: '#fff',
+        borderRadius: 15,
+        elevation: 8,
+        marginBottom: 15
     }
 })

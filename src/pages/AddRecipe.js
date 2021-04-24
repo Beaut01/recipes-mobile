@@ -1,8 +1,9 @@
 import React from 'react'
-import { Text, View, StyleSheet, TouchableWithoutFeedback, ScrollView, TextInput, Button, Picker, Keyboard } from 'react-native'
+import { Text, View, StyleSheet, TouchableWithoutFeedback, ScrollView, TextInput, Picker, Keyboard, Pressable } from 'react-native'
 import { useDispatch} from 'react-redux'
 import { addRecipe } from '../redux/actions/recipes'
 import GetPhoto from '../components/ImagePicker'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export const AddRecipe = ({navigation}) => {
     const dispatch = useDispatch()
@@ -73,13 +74,18 @@ export const AddRecipe = ({navigation}) => {
                     />
                     <GetPhoto onGet={photoGetHandler} />
                     <TextInput 
+                        color={'#9575cd'}
                         style={styles.input} 
                         placeholder='Опишите процесс приготовления...' 
                         multiline
                         value={descrValue}
                         onChangeText={text => onChangeDescr(text)}
                     />
-                    <Button title='Добавить рецепт' color={'#9575cd'} onPress={createRecipe} />
+                    <View style={styles.center} >
+                        <TouchableOpacity style={styles.buttonWrapper} onPress={createRecipe}>
+                            <Text style={styles.button}>Добавить рецепт</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </TouchableWithoutFeedback>
         </ScrollView>
@@ -108,5 +114,23 @@ const styles = StyleSheet.create({
     pickerContainer:{
         paddingBottom: 10,
         display: 'flex'
+    },
+    buttonWrapper: {
+        elevation: 8,
+        backgroundColor: "#9575cd",
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
+        justifyContent: 'center',
+    },
+    button: {
+        fontSize: 18,
+        color: '#fff',
+        fontWeight: 'bold',
+        alignSelf: "center",
+    },
+    center:{
+        flex: 1,
+        alignItems: 'center'
     }
 })

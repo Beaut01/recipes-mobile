@@ -54,6 +54,7 @@ export const Categories = () => {
                 keyExtractor={item => item.id.toString()}
                 renderItem={({item}) => <Category {...item} />}
                 horizontal={true}
+                showsHorizontalScrollIndicator={false}
             />       
         </View>
     )

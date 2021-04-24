@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
     camera: {
         justifyContent: 'center',
         alignItems: 'center',
-        paddingBottom: 10
+        paddingBottom: 10,
+        elevation: 8
     },
     image:{
         width: '100%',
