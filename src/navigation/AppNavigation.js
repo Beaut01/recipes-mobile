@@ -33,10 +33,16 @@ export default function AppNavigator() {
                 <Tab.Screen 
                     component={MainStack}
                     name='Main'
+                    options={{
+                        title: 'Главная'
+                    }}
                 />
                 <Tab.Screen 
                     component={AddRecipe}
                     name='Add'
+                    options={{
+                        title: 'Добавление'
+                    }}
                 />
             </Tab.Navigator>
         </NavigationContainer>
