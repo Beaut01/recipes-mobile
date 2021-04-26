@@ -4,9 +4,10 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 
 import { Recipe } from '../components/Recipe'
-import { deleteRecipe, loadRecipes } from '../redux/actions/recipes'
+import { deleteRecipe, fetchRecipes } from '../redux/actions/recipes'
 import {Categories} from '../components/Categories'
 import { Ionicons } from '@expo/vector-icons'
+import { AppLoader } from '../components/AppLoader'
 
 export const MainScreen = ({navigation}) => {
     const dispatch = useDispatch()
@@ -41,7 +42,7 @@ export const MainScreen = ({navigation}) => {
     }
 
     React.useEffect(() => {
-        dispatch(loadRecipes())
+        dispatch(fetchRecipes())
     }, [dispatch, activeCategory])
 
     React.useLayoutEffect(() => {
@@ -54,7 +55,7 @@ export const MainScreen = ({navigation}) => {
         })
     },[navigation])
 
-    const filteredRecipes = recipes.filter(r => r.category === activeCategory)
+    const filteredRecipes = recipes.filter(r => r.category == activeCategory)
 
     let data
 
@@ -66,6 +67,12 @@ export const MainScreen = ({navigation}) => {
 
     const getHeader = () => {
         return <Categories />
+    }
+
+    if (loading) {
+        return(
+            <AppLoader />
+        )
     }
 
     return(

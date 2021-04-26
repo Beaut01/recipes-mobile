@@ -25,8 +25,7 @@ export const AddRecipe = ({navigation}) => {
         const recipe = {
             name: name,
             ingredients: ingValue, 
-            description: descrValue, 
-            id: Date.now().toString(),
+            description: descrValue,
             category: selectedValue,
             imageURL: image
         }
